@@ -67,3 +67,18 @@ HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value)
     while (elem && strcmp (elem -> value, value)) elem = elem -> next;
     return elem;
 }
+
+const char *HashTableFind (HashTable *htable, const char *value)
+{
+    assert (htable              != nullptr);
+    assert (htable -> hash_func != nullptr);
+    assert (htable -> data      != nullptr);
+    assert (value               != nullptr);
+
+    size_t hash = htable -> hash_func (value) % htable -> size;
+
+    HashTableElem *elem = hashtable_list_find (htable -> data [hash], value);
+    
+    if (elem == nullptr) return nullptr;
+    else                 return elem -> value;
+}

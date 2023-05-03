@@ -36,4 +36,6 @@ HashTableElem *hashtable_list_insert (HashTableElem *elem, const char *value);
 
 HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value);
 
+const char *HashTableFind (HashTable *htable, const char *value);
+
 #endif
