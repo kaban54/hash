@@ -1,4 +1,4 @@
-CFLAGS += -O1
+CFLAGS += -O1 -DNDEBUG
 CC = g++
 
 

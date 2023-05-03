@@ -38,4 +38,8 @@ HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value);
 
 const char *HashTableFind (HashTable *htable, const char *value);
 
+void HashTableDelete (HashTable *htable, const char *value);
+
+HashTableElem *hashtable_list_delete (HashTableElem *elem, const char *value);
+
 #endif

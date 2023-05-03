@@ -64,7 +64,7 @@ HashTableElem *hashtable_list_insert (HashTableElem *elem, const char *value)
 
 HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value)
 {
-    while (elem && strcmp (elem -> value, value)) elem = elem -> next;
+    while (elem && strcmp (elem -> value, value) != 0) elem = elem -> next;
     return elem;
 }
 
@@ -81,4 +81,45 @@ const char *HashTableFind (HashTable *htable, const char *value)
     
     if (elem == nullptr) return nullptr;
     else                 return elem -> value;
+}
+
+void HashTableDelete (HashTable *htable, const char *value)
+{
+    assert (htable              != nullptr);
+    assert (htable -> hash_func != nullptr);
+    assert (htable -> data      != nullptr);
+    assert (value               != nullptr);
+
+    size_t hash = htable -> hash_func (value) % htable -> size;
+
+    htable -> data [hash] = hashtable_list_delete (htable -> data [hash], value);
+}
+
+HashTableElem *hashtable_list_delete (HashTableElem *elem, const char *value)
+{
+    if (elem == nullptr) return nullptr;
+
+    if (strcmp (elem -> value, value) == 0)
+    {
+        HashTableElem *ret = elem -> next;
+        free (elem);
+        return ret;
+    }
+
+    HashTableElem *ret =  elem;
+    HashTableElem *prev = elem;
+    elem = elem -> next;
+
+    while (elem && strcmp (elem -> value, value) != 0)
+    {
+        prev = elem;
+        elem = elem -> next;
+    }
+    
+    if (elem)
+    {
+        prev -> next = elem -> next;
+        free (elem);
+    }
+    return ret;
 }
