@@ -1,29 +1,35 @@
 #include "hashtable.h"
 
+uint64_t Const1Hash    (const char *str);
+uint64_t FirstSymbHash (const char *str);
+uint64_t StrlenHash    (const char *str);
+uint64_t LrotrHash     (const char *str);
+uint64_t LrotlHash     (const char *str);
+uint64_t Crc32Hash     (const char *str);
 
 int main ()
 {
 
 }
 
-size_t Const1Hash (const char *str)
+uint64_t Const1Hash (const char *str)
 {
     return 1;
 }
 
-size_t FirstSymbHash (const char *str)
+uint64_t FirstSymbHash (const char *str)
 {
     return *str;
 }
 
-size_t StrlenHash (const char *str)
+uint64_t StrlenHash (const char *str)
 {
     return strlen (str);
 }
 
-size_t LrotrHash (const char *str)
+uint64_t LrotrHash (const char *str)
 {
-    size_t hash = 0;
+    uint64_t hash = 0;
 
     while (*str != '\0')
     {
@@ -33,9 +39,9 @@ size_t LrotrHash (const char *str)
     return hash;
 }
 
-size_t LrotlHash (const char *str)
+uint64_t LrotlHash (const char *str)
 {
-    size_t hash = 0;
+    uint64_t hash = 0;
 
     while (*str != '\0')
     {
@@ -43,4 +49,20 @@ size_t LrotlHash (const char *str)
     }
 
     return hash;
+}
+
+uint64_t Crc32Hash (const char *str)
+{
+    uint32_t ret = 0xFFFFFFFF;
+
+    while (*str != '\0')
+    {
+        ret ^= *(str++);
+
+        for (int i = 0; i < 8; i++)
+        {
+            ret = (ret & 1) ? (ret >> 1) ^ 0xEDB88320 : ret >> 1;
+        }
+    }
+    return ~ret;
 }
