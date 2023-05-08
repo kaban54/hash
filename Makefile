@@ -1,12 +1,14 @@
 CFLAGS += -O1 -DNDEBUG
 CC = g++
+OBJDIR = obj/
+SRCDIR = src/
 
+test1: obj/test1.o obj/hashtable.o obj/hashfuncs.o obj/textfuncs.o
+	$(CC) obj/test1.o obj/hashtable.o obj/hashfuncs.o obj/textfuncs.o -o $@.exe
 
-obj/hashtable.o: src/hashtable.cpp
-	$(CC) -o obj/hashtable.o src/hashtable.cpp -c $(CFLAGS)
+$(OBJDIR)%.o: $(SRCDIR)%.cpp
+	$(CC) -c $(CFLAGS) $< -o $@
 
-obj/hashfuncs.o: src/hashfuncs.cpp
-	$(CC) -o obj/hashfuncs.o src/hashfuncs.cpp -c $(CFLAGS)
 
 clean:
 	rm obj/*.o -f

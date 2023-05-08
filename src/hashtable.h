@@ -41,4 +41,6 @@ void HashTableDelete (HashTable *htable, const char *value);
 
 HashTableElem *hashtable_list_delete (HashTableElem *elem, const char *value);
 
+size_t GetListLen (HashTableElem *elem);
+
 #endif

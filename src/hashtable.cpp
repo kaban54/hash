@@ -2,7 +2,7 @@
 
 
 
-void HashTableCtor (HashTable *htable, size_t (*hash_func)(const char *elem), size_t size)
+void HashTableCtor (HashTable *htable, uint64_t (*hash_func)(const char *elem), uint64_t size)
 {
     assert (htable    != nullptr);
     assert (hash_func != nullptr);
@@ -44,7 +44,7 @@ void HashTableInsert (HashTable *htable, const char *value)
     assert (htable -> data      != nullptr);
     assert (value               != nullptr);
 
-    size_t hash = htable -> hash_func (value) % htable -> size;
+    uint64_t hash = htable -> hash_func (value) % htable -> size;
 
     htable -> data [hash] = hashtable_list_insert (htable -> data [hash], value);
 }
@@ -75,7 +75,7 @@ const char *HashTableFind (HashTable *htable, const char *value)
     assert (htable -> data      != nullptr);
     assert (value               != nullptr);
 
-    size_t hash = htable -> hash_func (value) % htable -> size;
+    uint64_t hash = htable -> hash_func (value) % htable -> size;
 
     HashTableElem *elem = hashtable_list_find (htable -> data [hash], value);
     
@@ -90,7 +90,7 @@ void HashTableDelete (HashTable *htable, const char *value)
     assert (htable -> data      != nullptr);
     assert (value               != nullptr);
 
-    size_t hash = htable -> hash_func (value) % htable -> size;
+    uint64_t hash = htable -> hash_func (value) % htable -> size;
 
     htable -> data [hash] = hashtable_list_delete (htable -> data [hash], value);
 }
@@ -121,5 +121,18 @@ HashTableElem *hashtable_list_delete (HashTableElem *elem, const char *value)
         prev -> next = elem -> next;
         free (elem);
     }
+    return ret;
+}
+
+size_t GetListLen (HashTableElem *elem)
+{
+    size_t ret = 0;
+
+    while (elem)
+    {
+        ret++;
+        elem = elem -> next;
+    }
+
     return ret;
 }
