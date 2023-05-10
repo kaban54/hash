@@ -106,25 +106,45 @@ uint64_t Crc32Hash (const char *str)
 
 #### 1. Const1Hash
 
+![](./images/Const1Hash.png)
+
 Стандартное отклонение: 1044,57
 
 #### 2. FirstSymbHash
+
+![](./images/FirstSymbHash.png)
+
+Приблизим график
+
+![](./images/FirstSymbHash_zoomed.png)
 
 Стандартное отклонение: 212,84
 
 #### 3. StrlenHash
 
+![](./images/StrlenHash.png)
+
+Приблизим график
+
+![](./images/StrlenHash_zoomed.png)
+
 Стандартное отклонение: 348,18
 
 #### 4. RorHash
+
+![](./images/RorHash.png)
 
 Стандартное отклонение: 5,38
 
 #### 5. RolHash
 
+![](./images/RolHash.png)
+
 Стандартное отклонение: 12,35
 
 #### 6. Crc32
+
+![](./images/Crc32.png)
 
 Стандартное отклонение: 3,25
 
