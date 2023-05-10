@@ -33172,9 +33172,6 @@ claimed
 claiming
 claim's
 claims
-éclair
-éclair's
-éclairs
 clairvoyance
 clairvoyance's
 clairvoyant
@@ -33319,8 +33316,6 @@ classroom's
 classrooms
 class's
 classy
-éclat
-éclat's
 clatter
 clattered
 clattering
@@ -61545,7 +61540,6 @@ lampshade's
 lampshades
 lam's
 lams
-élan
 lance
 lanced
 lancer
@@ -61639,7 +61633,6 @@ lankiness's
 lanky
 lanolin
 lanolin's
-élan's
 lantern
 lantern's
 lanterns
@@ -66146,7 +66139,6 @@ mightiness
 mightiness's
 might's
 mighty
-émigré
 migraine
 migraine's
 migraines
@@ -66161,8 +66153,6 @@ migration
 migration's
 migrations
 migratory
-émigré's
-émigrés
 mike
 miked
 mike's
@@ -69117,8 +69107,6 @@ next's
 nexus
 nexuses
 nexus's
-Ångström
-Ångström's
 niacin
 niacin's
 nib
@@ -73208,7 +73196,6 @@ paywalls
 payware
 pct
 pd
-épée
 pea
 peace
 peaceable
@@ -74060,8 +74047,6 @@ perverted
 perverting
 pervert's
 perverts
-épée's
-épées
 peseta
 peseta's
 pesetas
@@ -97904,9 +97889,6 @@ tuckers
 tucking
 tuck's
 tucks
-étude
-étude's
-études
 tuft
 tufted
 tufting
