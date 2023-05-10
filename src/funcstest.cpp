@@ -3,7 +3,7 @@
 #include "textfuncs.h"
 
 const char *const  input_file_name = "input.txt";
-const char *const output_file_name = "test1out.csv";
+const char *const output_file_name = "output.csv";
 
 const size_t HASHTABLE_SIZE = 9973;
 const size_t NUM_OF_HFUNCS = 6;
@@ -73,7 +73,7 @@ void PrintListsLen (HashTable *htable, FILE *out_file)
     for (size_t index = 0; index < htable -> size; index++)
     {
         size_t len = GetListLen (htable -> data [index]);
-        fprintf (out_file, "%lld;", len);
+        fprintf (out_file, "%ld;", len);
     }
     fprintf (out_file, "\n");
 
