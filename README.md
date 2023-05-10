@@ -6,7 +6,9 @@
 
 ### Исследуемые функци
 
-1. Функция, всегда возвращаающая 1.
+#### 1. Const1Hash
+
+Функция, всегда возвращаающая 1.
 
 ```C
 uint64_t Const1Hash (const char *str)
@@ -15,7 +17,9 @@ uint64_t Const1Hash (const char *str)
 }
 ```
 
-2. Функция, возвращающая ASCII-код первого символа.
+#### 2. FirstSymbHash
+
+Функция, возвращающая ASCII-код первого символа.
 
 ```C
 uint64_t FirstSymbHash (const char *str)
@@ -24,7 +28,9 @@ uint64_t FirstSymbHash (const char *str)
 }
 ```
 
-3. Функция, возвращающая длину строки.
+#### 3. StrlenHash
+
+Функция, возвращающая длину строки.
 
 ```C
 uint64_t StrlenHash (const char *str)
@@ -32,7 +38,9 @@ uint64_t StrlenHash (const char *str)
     return strlen (str);
 }
 ```
-4. RorHash
+#### 4. RorHash
+
+На каждом шаге значение хеша циклически сдвигается вправо, после чего делается xor с ASCII-кодом следующего символа.
 
 ```C
 uint64_t RorHash (const char *str)
@@ -48,7 +56,9 @@ uint64_t RorHash (const char *str)
 }
 ```
 
-5. RolHash
+#### 5. RolHash
+
+То же, что и RorHash, но сдвиг делается влево.
 
 ```C
 uint64_t RolHash (const char *str)
@@ -64,7 +74,7 @@ uint64_t RolHash (const char *str)
 }
 ```
 
-6. Crc32
+#### 6. [Crc32](https://ru.wikibooks.org/wiki/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%BE%D0%B2/%D0%A6%D0%B8%D0%BA%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%B8%D0%B7%D0%B1%D1%8B%D1%82%D0%BE%D1%87%D0%BD%D1%8B%D0%B9_%D0%BA%D0%BE%D0%B4)
 
 ```C
 uint64_t Crc32Hash (const char *str)
@@ -84,8 +94,15 @@ uint64_t Crc32Hash (const char *str)
 }
 ```
 
+### Входные данные
+
+Для исследования функций в хеш-таблицу было загружено около 100000 различных английских слов.
+Размер хеш таблицы — 9973.
+
 ### Ход работы
 
 Для каждой функции построим график зависимости длины цепочки от хеша:
+
+#### 1. 
 
 
