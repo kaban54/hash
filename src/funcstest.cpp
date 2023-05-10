@@ -23,8 +23,8 @@ int main ()
     HashTableCtor (hashtables + 0, Const1Hash,    HASHTABLE_SIZE);
     HashTableCtor (hashtables + 1, FirstSymbHash, HASHTABLE_SIZE);
     HashTableCtor (hashtables + 2, StrlenHash,    HASHTABLE_SIZE);
-    HashTableCtor (hashtables + 3, LrotlHash,     HASHTABLE_SIZE);
-    HashTableCtor (hashtables + 4, LrotrHash,     HASHTABLE_SIZE);
+    HashTableCtor (hashtables + 3, RolHash,     HASHTABLE_SIZE);
+    HashTableCtor (hashtables + 4, RorHash,     HASHTABLE_SIZE);
     HashTableCtor (hashtables + 5, Crc32Hash,     HASHTABLE_SIZE);
 
     TestHashFuncs (hashtables, &txt, output_file_name);

@@ -15,7 +15,7 @@ uint64_t StrlenHash (const char *str)
     return strlen (str);
 }
 
-uint64_t LrotrHash (const char *str)
+uint64_t RorHash (const char *str)
 {
     uint64_t hash = 0;
 
@@ -27,7 +27,7 @@ uint64_t LrotrHash (const char *str)
     return hash;
 }
 
-uint64_t LrotlHash (const char *str)
+uint64_t RolHash (const char *str)
 {
     uint64_t hash = 0;
 
