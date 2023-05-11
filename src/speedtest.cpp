@@ -7,6 +7,8 @@ const char *const  input_file_name = "input.txt";
 const char *const output_file_name = "test1out.csv";
 
 const size_t HASHTABLE_SIZE = 9973;
+const size_t NUM_OF_OPS     = 20000000;
+
 
 void HashTableSpeedTest (HashTable *htable, Text *txt);
 void LoadWords     (HashTable *htable, Text *txt);
@@ -35,14 +37,14 @@ void HashTableSpeedTest (HashTable *htable, Text *txt)
 
     clock_t start = clock ();
 
-    for (size_t index = 0; index < txt -> len; index += 1)
+    for (size_t index = 0; index < NUM_OF_OPS; index += 1)
     {
-        HashTableFind (htable, txt -> data [index].str);
+        HashTableFind (htable, txt -> data [index % txt -> len].str);
     }
 
     clock_t end = clock ();
 
-    printf ("time = %lfs\n", (double)(end - start) / CLOCKS_PER_SEC);
+    printf ("%ld find operations done.\ntime = %lfs\n", NUM_OF_OPS, (double)(end - start) / CLOCKS_PER_SEC);
 }
 
 void LoadWords (HashTable *htable, Text *txt)
