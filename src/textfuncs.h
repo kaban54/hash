@@ -10,7 +10,7 @@
 struct Line
 {
     size_t len = 0;
-    char *str  = nullptr;
+    char str [32];
 };
 
 struct Text

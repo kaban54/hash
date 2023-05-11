@@ -1,6 +1,5 @@
 #include "textfuncs.h"
 
-
 void ReadText (const char *input_file_name, struct Text *txt)
 {    
     assert (input_file_name != nullptr);
@@ -54,7 +53,7 @@ void SetLines (struct Text *txt)
 {
     assert (txt != nullptr);
 
-    txt -> data = (struct Line*) calloc (txt -> len + 1, sizeof ((txt -> data)[0]));
+    txt -> data = (struct Line*) calloc (txt -> len, sizeof ((txt -> data)[0]));
     assert (txt -> data != nullptr);
 
     char *str_ptr = txt -> buffer;
@@ -64,14 +63,11 @@ void SetLines (struct Text *txt)
     {
         length = strlen (str_ptr);
 
-        (txt -> data + index) -> str = str_ptr;
+        strncpy ((txt -> data + index) -> str, str_ptr, 32);
         (txt -> data + index) -> len =  length;
 
         str_ptr += length + 1;
     }
-
-    (txt -> data + txt -> len) -> str = nullptr;
-    (txt -> data + txt -> len) -> len = 0;
 }
 
 

@@ -11,6 +11,9 @@ funcstest: obj/funcstest.o obj/hashtable.o obj/hashfuncs.o obj/textfuncs.o
 speedtest: obj/speedtest.o obj/hashtable.o obj/hashfuncs.o obj/textfuncs.o
 	$(CC) obj/speedtest.o obj/hashtable.o obj/hashfuncs.o obj/textfuncs.o -o $@
 
+obj/mystrcmp.o:
+	nasm -felf64 -o obj/asm.o src/mystrcmp.asm
+
 $(OBJDIR)%.o: $(SRCDIR)%.cpp
 	$(CC) -c $(CFLAGS) $< -o $@
 

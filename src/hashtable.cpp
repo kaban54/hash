@@ -1,7 +1,5 @@
 #include "hashtable.h"
 
-
-
 void HashTableCtor (HashTable *htable, uint64_t (*hash_func)(const char *elem), uint64_t size)
 {
     assert (htable    != nullptr);
