@@ -62,7 +62,7 @@ HashTableElem *hashtable_list_insert (HashTableElem *elem, const char *value)
 
 HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value)
 {
-    while (elem && strncmp (elem -> value, value, MAX_STRLEN) != 0) elem = elem -> next;
+    while (elem && mystrcmp (elem -> value, value) != 0) elem = elem -> next;
     return elem;
 }
 

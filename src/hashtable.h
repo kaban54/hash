@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-//extern "C" int64_t mystrcmp (const char *str1, const char *str2);
+extern "C" int64_t mystrcmp (const char *str1, const char *str2);
 
 const size_t MAX_STRLEN = 32;
 
