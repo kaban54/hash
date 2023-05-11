@@ -204,5 +204,39 @@ uint64_t Crc32Hash (const char *str)
 Все тесты проводилиись на процессоре Intel® Core™ i5-1135G7 с компилятором gcc версии 11.3.0.\
 Флаги компиляции: -O1 -mavx2 -DNDEBUG
 
+### Версия без оптимизаций (v0)
+
+Время:
+
+Используем callgrind для того, чтобы узнать распределение времени по функциям и выбрать функцию для оптимизации.
+
+![](./images/kcachegrind_v0.png)
+
+Можем увидеть, что большая часть времени тратится на вычисление хешей.
+
+Перепишем хеш-функцию, используя SSE инструкции.
+
+```c
+uint64_t Crc32Intrin (const char *str)
+{
+    uint64_t  hash = 0;
+    uint64_t *data = (uint64_t *) str;
+
+    hash = _mm_crc32_u64 (hash, *(data++));
+    hash = _mm_crc32_u64 (hash, *(data++));
+    hash = _mm_crc32_u64 (hash, *(data++));
+    hash = _mm_crc32_u64 (hash, *(data  ));
+
+    return hash;
+}
+```
+
+
+
+
+
+
+
+
 
 
