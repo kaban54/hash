@@ -291,6 +291,76 @@ Return: ret
 
 ![](./images/kcachegrind_v2.png)
 
+Теперь самая времязатратная функция — функция поиска элемента в списке.
+
+Перепишем эту функцию с помощью ассемблерной вставки, при этом заинлайним раннее написанную нами функцию сравнения строк.
+Это должно ускорить программу, т.к. функция сравнения вызывается чаще всех.
+
+Было:
+
+```c
+
+HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value)
+{
+    while (elem && mystrcmp (elem -> value, value) != 0) elem = elem -> next;
+    return elem;
+}
+
+```
+
+Стало:
+
+```c
+
+inline HashTableElem *hashtable_list_find_asm (HashTableElem *elem, const char *value)
+{
+    __asm__
+    (
+            ".intel_syntax noprefix\n"
+
+            "Next:\n"
+
+            "test %1, %1\n"
+            "jz Return\n"
+
+            "mov rax, qword ptr [%1]\n"
+            "xor rax, qword ptr [%2]\n"
+
+            "jnz Not_eq\n"
+
+            "mov rax, qword ptr [%1 + 8]\n"
+            "xor rax, qword ptr [%2 + 8]\n"
+
+            "jnz Not_eq\n"
+
+            "mov rax, qword ptr [%1 + 16]\n"
+            "xor rax, qword ptr [%2 + 16]\n"
+
+            "jnz Not_eq\n"
+
+            "mov rax, qword ptr [%1 + 24]\n"
+            "xor rax, qword ptr [%2 + 24]\n"
+
+            "jz Return\n"
+
+            "Not_eq:\n"
+
+            "mov rax, [%1 + 32]\n"
+            "mov %1, rax\n"
+            "jmp Next\n"
+
+            "Return:\n"
+            "mov %0, %1\n"
+
+            ".att_syntax prefix\n"
+
+        : "=r" (elem) : "r" (elem), "r" (value) : "%rax"
+    );
+
+    return elem;
+}
+
+```
 
 | Версия | Время     | Абсолютное ускорение | Относительное ускорение |
 |--------|-----------|----------------------|-------------------------|
