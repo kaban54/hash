@@ -19,7 +19,7 @@ int main ()
     ReadText (input_file_name, &txt);
 
     HashTable htable = {};
-    HashTableCtor (&htable, Crc32Hash, HASHTABLE_SIZE);
+    HashTableCtor (&htable, Crc32Intrin, HASHTABLE_SIZE);
 
     LoadWords (&htable, &txt);
 

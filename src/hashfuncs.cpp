@@ -54,3 +54,16 @@ uint64_t Crc32Hash (const char *str)
     }
     return ret;
 }
+
+uint64_t Crc32Intrin (const char *str)
+{
+    uint64_t  hash = 0;
+    uint64_t *data = (uint64_t *) str;
+
+    hash = _mm_crc32_u64 (hash, *(data++));
+    hash = _mm_crc32_u64 (hash, *(data++));
+    hash = _mm_crc32_u64 (hash, *(data++));
+    hash = _mm_crc32_u64 (hash, *(data  ));
+
+    return hash;
+}

@@ -1,4 +1,4 @@
-CFLAGS += -O1 -DNDEBUG
+CFLAGS += -O1 -DNDEBUG -msse4.2
 CC = g++
 OBJDIR = obj/
 SRCDIR = src/
