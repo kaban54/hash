@@ -75,7 +75,7 @@ const char *HashTableFind (HashTable *htable, const char *value)
 
     uint64_t hash = htable -> hash_func (value) % htable -> size;
 
-    HashTableElem *elem = hashtable_list_find (htable -> data [hash], value);
+    HashTableElem *elem = hashtable_list_find_asm (htable -> data [hash], value);
     
     if (elem == nullptr) return nullptr;
     else                 return elem -> value;
@@ -133,4 +133,53 @@ size_t GetListLen (HashTableElem *elem)
     }
 
     return ret;
+}
+
+
+inline HashTableElem *hashtable_list_find_asm (HashTableElem *elem, const char *value)
+{
+    __asm__
+    (
+            ".intel_syntax noprefix\n"
+
+            "Next:\n"
+
+            "test %1, %1\n"
+            "jz Return\n"
+
+            "mov rax, qword ptr [%1]\n"
+            "xor rax, qword ptr [%2]\n"
+
+            "jnz Not_eq\n"
+
+            "mov rax, qword ptr [%1 + 8]\n"
+            "xor rax, qword ptr [%2 + 8]\n"
+
+            "jnz Not_eq\n"
+
+            "mov rax, qword ptr [%1 + 16]\n"
+            "xor rax, qword ptr [%2 + 16]\n"
+
+            "jnz Not_eq\n"
+
+            "mov rax, qword ptr [%1 + 24]\n"
+            "xor rax, qword ptr [%2 + 24]\n"
+
+            "jz Return\n"
+
+            "Not_eq:\n"
+
+            "mov rax, [%1 + 32]\n"
+            "mov %1, rax\n"
+            "jmp Next\n"
+
+            "Return:\n"
+            "mov %0, %1\n"
+
+            ".att_syntax prefix\n"
+
+        : "=r" (elem) : "r" (elem), "r" (value) : "%rax"
+    );
+
+    return elem;
 }

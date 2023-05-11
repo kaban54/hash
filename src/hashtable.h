@@ -46,4 +46,6 @@ HashTableElem *hashtable_list_delete (HashTableElem *elem, const char *value);
 
 size_t GetListLen (HashTableElem *elem);
 
+inline HashTableElem *hashtable_list_find_asm (HashTableElem *elem, const char *value);
+
 #endif
