@@ -7,10 +7,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+const size_t MAX_STRLEN = 32;
 
 struct HashTableElem
 {
-    const char *value;
+    char value [MAX_STRLEN];
     HashTableElem *next;
 };
 

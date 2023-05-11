@@ -56,7 +56,7 @@ HashTableElem *hashtable_list_insert (HashTableElem *elem, const char *value)
     HashTableElem *newelem = (HashTableElem *) calloc (1, sizeof (HashTableElem));
     assert (newelem != nullptr);
 
-    newelem -> value = value;
+    strncpy (newelem -> value, value, MAX_STRLEN);
     newelem -> next = elem;
 
     return newelem;
@@ -64,7 +64,7 @@ HashTableElem *hashtable_list_insert (HashTableElem *elem, const char *value)
 
 HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value)
 {
-    while (elem && strcmp (elem -> value, value) != 0) elem = elem -> next;
+    while (elem && strncmp (elem -> value, value, MAX_STRLEN) != 0) elem = elem -> next;
     return elem;
 }
 
@@ -99,7 +99,7 @@ HashTableElem *hashtable_list_delete (HashTableElem *elem, const char *value)
 {
     if (elem == nullptr) return nullptr;
 
-    if (strcmp (elem -> value, value) == 0)
+    if (strncmp (elem -> value, value, MAX_STRLEN) == 0)
     {
         HashTableElem *ret = elem -> next;
         free (elem);
@@ -110,7 +110,7 @@ HashTableElem *hashtable_list_delete (HashTableElem *elem, const char *value)
     HashTableElem *prev = elem;
     elem = elem -> next;
 
-    while (elem && strcmp (elem -> value, value) != 0)
+    while (elem && strncmp (elem -> value, value, MAX_STRLEN) != 0)
     {
         prev = elem;
         elem = elem -> next;
