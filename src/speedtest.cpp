@@ -4,7 +4,6 @@
 #include <time.h>
 
 const char *const  input_file_name = "input.txt";
-const char *const output_file_name = "test1out.csv";
 
 const size_t HASHTABLE_SIZE = 9973;
 const size_t NUM_OF_OPS     = 20000000;

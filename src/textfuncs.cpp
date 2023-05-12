@@ -63,7 +63,7 @@ void SetLines (struct Text *txt)
     {
         length = strlen (str_ptr);
 
-        strncpy ((txt -> data + index) -> str, str_ptr, 32);
+        strncpy ((txt -> data + index) -> str, str_ptr, MAX_STR_LEN);
         (txt -> data + index) -> len =  length;
 
         str_ptr += length + 1;

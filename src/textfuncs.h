@@ -7,10 +7,12 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 
+const size_t MAX_STR_LEN = 32;
+
 struct Line
 {
     size_t len = 0;
-    char str [32];
+    char str [MAX_STR_LEN];
 };
 
 struct Text
