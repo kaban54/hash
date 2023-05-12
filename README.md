@@ -112,7 +112,7 @@ uint64_t Crc32Hash (const char *str)
 
 ![](./images/FirstSymbHash.png)
 
-Приблизим график
+Видно, что диапазон значений функции гораздо меньше размеров таблицы, поэтому приблизим ту часть графика, где длины цепочек ненулевые.
 
 ![](./images/FirstSymbHash_zoomed.png)
 
@@ -122,7 +122,7 @@ uint64_t Crc32Hash (const char *str)
 
 ![](./images/StrlenHash.png)
 
-Приблизим график
+Аналогично прошлой функции приблизим график.
 
 ![](./images/StrlenHash_zoomed.png)
 
