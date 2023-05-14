@@ -49,6 +49,6 @@ void HashTableRemove (HashTable *htable, const char *value);
 
 void hashtable_list_remove (HashTableList *lst, const char *value);
 
-//inline HashTableElem *hashtable_list_find_asm (HashTableElem *elem, const char *value);
+inline const char *hashtable_list_find_asm (HashTableList *lst, const char *value);
 
 #endif
