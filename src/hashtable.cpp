@@ -54,8 +54,8 @@ HashTableElem *hashtable_list_insert (HashTableElem *elem, const char *value)
     HashTableElem *newelem = (HashTableElem *) calloc (1, sizeof (HashTableElem));
     assert (newelem != nullptr);
 
-    strncpy (newelem -> value, value, MAX_STRLEN);
-    newelem -> next = elem;
+    newelem -> value = value;
+    newelem -> next  = elem;
 
     return newelem;
 }
@@ -75,12 +75,13 @@ const char *HashTableFind (HashTable *htable, const char *value)
 
     uint64_t hash = htable -> hash_func (value) % htable -> size;
 
-    HashTableElem *elem = hashtable_list_find_asm (htable -> data [hash], value);
+    HashTableElem *elem = hashtable_list_find (htable -> data [hash], value);
     
     if (elem == nullptr) return nullptr;
     else                 return elem -> value;
 }
 
+/*
 void HashTableDelete (HashTable *htable, const char *value)
 {
     assert (htable              != nullptr);
@@ -121,7 +122,7 @@ HashTableElem *hashtable_list_delete (HashTableElem *elem, const char *value)
     }
     return ret;
 }
-
+*/
 size_t GetListLen (HashTableElem *elem)
 {
     size_t ret = 0;

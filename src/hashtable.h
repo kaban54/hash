@@ -9,11 +9,10 @@
 
 extern "C" int64_t mystrcmp (const char *str1, const char *str2);
 
-const size_t MAX_STRLEN = 32;
 
-struct HashTableElem
+struct alignas(64) HashTableElem
 {
-    char value [MAX_STRLEN];
+    const char *value;
     HashTableElem *next;
 };
 

@@ -3,14 +3,14 @@
 #include "textfuncs.h"
 #include <time.h>
 
-const char *const  input_file_name = "input.txt";
+const char *const input_file_name = "input.txt";
 
 const size_t HASHTABLE_SIZE = 9973;
 const size_t NUM_OF_OPS     = 20000000;
 
 
 void HashTableSpeedTest (HashTable *htable, Text *txt);
-void LoadWords     (HashTable *htable, Text *txt);
+void LoadWords          (HashTable *htable, Text *txt);
 
 int main ()
 {
