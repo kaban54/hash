@@ -72,8 +72,7 @@ void PrintListsLen (HashTable *htable, FILE *out_file)
 
     for (size_t index = 0; index < htable -> size; index++)
     {
-        size_t len = GetListLen (htable -> data [index]);
-        fprintf (out_file, "%ld;", len);
+        fprintf (out_file, "%ld;", htable -> data [index].size);
     }
     fprintf (out_file, "\n");
 
