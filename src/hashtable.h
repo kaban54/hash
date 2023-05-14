@@ -9,7 +9,7 @@
 
 extern "C" int64_t mystrcmp (const char *str1, const char *str2);
 
-const size_t LIST_BASE_CAP = 1;
+const size_t LIST_BASE_CAP = 4;
 
 struct HashTableList 
 {

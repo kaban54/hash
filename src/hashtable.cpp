@@ -90,7 +90,7 @@ const char *hashtable_list_find (HashTableList *lst, const char *value)
 {
     for (size_t index = 0; index < lst -> size; index++)
     {
-        if (strcmp (value, lst -> data [index]) == 0) return lst -> data [index];
+        if (mystrcmp (value, lst -> data [index]) == 0) return lst -> data [index];
     }
     return nullptr;
 }
