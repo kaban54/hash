@@ -256,6 +256,17 @@ uint64_t Crc32Intrin (const char *str)
 
 ```asm
 
+;-----------------------------------
+; Compares two 32-byte strings
+;-----------------------------------
+; Entry:    rdi = string 1
+;           rsi = string 2
+;
+; Exit:     rax  = 0 if strings are equal
+;           rax != 0 if not
+;
+;-----------------------------------
+
 mystrcmp:   
 
         mov rax, qword [rdi]
@@ -302,10 +313,13 @@ Return: ret
 
 ```c
 
-HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value)
+const char *hashtable_list_find (HashTableList *lst, const char *value)
 {
-    while (elem && mystrcmp (elem -> value, value) != 0) elem = elem -> next;
-    return elem;
+    for (size_t index = 0; index < lst -> size; index++)
+    {
+        if (mystrcmp (value, lst -> data [index]) == 0) return lst -> data [index];
+    }
+    return nullptr;
 }
 
 ```
@@ -314,52 +328,59 @@ HashTableElem *hashtable_list_find (HashTableElem *elem, const char *value)
 
 ```c
 
-inline HashTableElem *hashtable_list_find_asm (HashTableElem *elem, const char *value)
+inline const char *hashtable_list_find_asm (HashTableList *lst, const char *value)
 {
+    const char *ret = nullptr;
+
     __asm__
     (
             ".intel_syntax noprefix\n"
 
+            "mov rcx, %1\n"
             "Next:\n"
 
-            "test %1, %1\n"
-            "jz Return\n"
+            "test rcx, rcx\n"
+            "jz Ret_null\n"                 // while (size > 0) {
 
-            "mov rax, qword ptr [%1]\n"
-            "xor rax, qword ptr [%2]\n"
+            "mov %0, [%2]\n"
 
-            "jnz Not_eq\n"
-
-            "mov rax, qword ptr [%1 + 8]\n"
-            "xor rax, qword ptr [%2 + 8]\n"
+            "mov rax, qword ptr [%0]\n"
+            "xor rax, qword ptr [%3]\n"
 
             "jnz Not_eq\n"
 
-            "mov rax, qword ptr [%1 + 16]\n"
-            "xor rax, qword ptr [%2 + 16]\n"
+            "mov rax, qword ptr [%0 + 8]\n"
+            "xor rax, qword ptr [%3 + 8]\n"
 
             "jnz Not_eq\n"
 
-            "mov rax, qword ptr [%1 + 24]\n"
-            "xor rax, qword ptr [%2 + 24]\n"
+            "mov rax, qword ptr [%0 + 16]\n"
+            "xor rax, qword ptr [%3 + 16]\n"
 
-            "jz Return\n"
+            "jnz Not_eq\n"
+
+            "mov rax, qword ptr [%0 + 24]\n"
+            "xor rax, qword ptr [%3 + 24]\n"
+
+            "jz Return\n"                   // if (strcmp (elem_ptr, value) == 0) return elem_ptr;
 
             "Not_eq:\n"
-
-            "mov rax, [%1 + 32]\n"
-            "mov %1, rax\n"
+            "add %2, 8\n"                   // elem_ptr++;
+            "dec rcx\n"                     // size--; }
             "jmp Next\n"
 
+
+            "Ret_null:\n"                   // return nullptr;
+            "xor %0, %0\n"
+
             "Return:\n"
-            "mov %0, %1\n"
 
             ".att_syntax prefix\n"
 
-        : "=r" (elem) : "r" (elem), "r" (value) : "%rax"
+        : "=r" (ret) : "r" (lst -> size), "r" (lst -> data), "r" (value) : "%rax", "%rcx"
     );
 
-    return elem;
+    return ret;
 }
 
 ```
