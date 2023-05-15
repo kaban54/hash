@@ -3,7 +3,7 @@
 #include "textfuncs.h"
 #include <time.h>
 
-const char *const input_file_name = "input.txt";
+const char *const INPUT_FILE_NAME = "input.txt";
 
 const size_t HASHTABLE_SIZE = 9973;
 const size_t NUM_OF_OPS     = 20000000;
@@ -15,7 +15,7 @@ void LoadWords          (HashTable *htable, Text *txt);
 int main ()
 {
     Text txt;
-    ReadText (input_file_name, &txt);
+    ReadText (INPUT_FILE_NAME, &txt);
 
     HashTable htable = {};
     HashTableCtor (&htable, Crc32Intrin, HASHTABLE_SIZE);

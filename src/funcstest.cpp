@@ -2,8 +2,8 @@
 #include "hashfuncs.h"
 #include "textfuncs.h"
 
-const char *const  input_file_name = "input.txt";
-const char *const output_file_name = "output.csv";
+const char *const  INPUT_FILE_NAME = "input.txt";
+const char *const OUTPUT_FILE_NAME = "output.csv";
 
 const size_t HASHTABLE_SIZE = 9973;
 const size_t NUM_OF_HFUNCS = 6;
@@ -16,18 +16,18 @@ int main ()
 {
     Text txt;
 
-    ReadText (input_file_name, &txt);
+    ReadText (INPUT_FILE_NAME, &txt);
 
     HashTable hashtables [NUM_OF_HFUNCS] = {};
 
     HashTableCtor (hashtables + 0, Const1Hash,    HASHTABLE_SIZE);
     HashTableCtor (hashtables + 1, FirstSymbHash, HASHTABLE_SIZE);
     HashTableCtor (hashtables + 2, StrlenHash,    HASHTABLE_SIZE);
-    HashTableCtor (hashtables + 3, RolHash,     HASHTABLE_SIZE);
-    HashTableCtor (hashtables + 4, RorHash,     HASHTABLE_SIZE);
+    HashTableCtor (hashtables + 3, RolHash,       HASHTABLE_SIZE);
+    HashTableCtor (hashtables + 4, RorHash,       HASHTABLE_SIZE);
     HashTableCtor (hashtables + 5, Crc32Hash,     HASHTABLE_SIZE);
 
-    TestHashFuncs (hashtables, &txt, output_file_name);
+    TestHashFuncs (hashtables, &txt, OUTPUT_FILE_NAME);
 
     for (size_t index = 0; index < NUM_OF_HFUNCS; index++) HashTableDtor (hashtables + index);
 
